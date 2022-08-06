@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root">
+    <form id="for">
+      <h1>Buy nft</h1>
+      <div>
+        <label for="fname">Name nft : </label>
+        <input type="text" id="name_nft" name="name_nft" required>
+      </div>
+      <div>
+        <label for="fname">Min : </label>
+        <input type="float" id="min_nft" name="min_nft" required>
+      </div>
+      <div>
+        <label for="lname">Max : </label>
+        <input type="float" id="max_nft" name="max_nft" required>
+      </div>
+      <div>
+        <p id="result"></p>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </div>
+  <div class="loader" id="loader"></div>
+  <script src="/assets/js/hideimage.js"></script>
+</body>
+
+</html>
