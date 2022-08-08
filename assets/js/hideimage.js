@@ -85,6 +85,7 @@ submit.onsubmit = function (element) {
   var original = convert_string(element_val);
   var element1 = original[0];
   var element2 = original[1];
+  console.log(element_val[0].trim().toLowerCase().replaceAll(" ", "_").replace(/[^a-zA-Z ]/g, ""))
   const url = `https://magiceden.io/marketplace/${element_val[0].trim().toLowerCase().replaceAll(" ", "_")}?price=%7B%22filterMaxPrice%22%3A${element2}%2C%22filterMinPrice%22%3A${element1}%7D`;
   var loading = false;
 

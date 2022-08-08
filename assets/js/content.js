@@ -1,5 +1,13 @@
+function _x(STR_XPATH) {
+    var xresult = document.evaluate(STR_XPATH, document, null, XPathResult.ANY_TYPE, null);
+    var xnodes = [];
+    var xres;
+    while (xres = xresult.iterateNext()) {
+        xnodes.push(xres);
+    }
 
-const parse = require('./jquery-3.6.0.min.js');
+    return xnodes;
+}
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var execute_script = false;
@@ -24,7 +32,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 
     async function test() {
-      var listeners = $x('//*[@id="content"]/div[2]/div[3]/div[2]/div[5]/div[1]/div[1]') == [] || $x('//*[@id="content"]/div[2]/div[3]/div[2]/div[4]/div/div[2]/div[1]');
+      var listeners = _x('//*[@id="content"]/div[2]/div[3]/div[2]/div[5]/div[1]/div[1]') == [] || _x('//*[@id="content"]/div[2]/div[3]/div[2]/div[4]/div/div[2]/div[1]');
       if ($(".justify-content-center").length == 0 && listeners[0].children.length == count_l) { console.log("fin"); return; }
       while (count_l < listeners[0].children.length) {
         console.log(count_l);
@@ -40,7 +48,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         window.scrollTo(0, document.body.scrollHeight);
         while ($(".justify-content-center")[0].children[0].innerHTML == ' Loading more...' && count_l == listeners[0].children.length) {
           await wait_seconde(1);
-          listeners = $x('//*[@id="content"]/div[2]/div[3]/div[2]/div[5]/div[1]/div[1]') == [] || $x('//*[@id="content"]/div[2]/div[3]/div[2]/div[4]/div/div[2]/div[1]');
+          listeners = _x('//*[@id="content"]/div[2]/div[3]/div[2]/div[5]/div[1]/div[1]') == [] || _x('//*[@id="content"]/div[2]/div[3]/div[2]/div[4]/div/div[2]/div[1]');
         }
         test();
       }
@@ -50,9 +58,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     else sendResponse(false);
     execute_script = true
     chrome.runtime.sendMessage({ code: 3, data: execute_script });
-    if ($x('//*[@id="content"]/div[2]/div[1]/div[3]/div/div/div/div/div/div/button[1]').length != 0)
-      $x('//*[@id="content"]/div[2]/div[1]/div[3]/div/div/div/div/div/div/button[1]')[0].click();
-    if ($x('//*[@id="root"]/div[1]/header/nav/div[2]/div[2]/div/button[2]').length == 0) {
+    if (_x('//*[@id="content"]/div[2]/div[1]/div[3]/div/div/div/div/div/div/button[1]').length != 0)
+      _x('//*[@id="content"]/div[2]/div[1]/div[3]/div/div/div/div/div/div/button[1]')[0].click();
+    if (_x('//*[@id="root"]/div[1]/header/nav/div[2]/div[2]/div/button[2]').length == 0) {
       end_script(request);
       alert("Wallet not connected");
       return
